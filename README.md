@@ -17,3 +17,7 @@ Various errors and solutions while running the Adaptor file
 Before running "TableLoadThroughMap.exe" remove all comments from the "config_TableMap_Bank1.json".
 
 
+2. After completing the database part we come to the visualisation of data. Open your metabase and then open the admin panel. Add a databse with all the details and correct password. Now the newly added database will be visible. After adding the data its very important to again go into the showing database and click sync database schema now.
+
+3. The various visualisations and results are provided in Results.pdf. Do use the real images i.e 1.png,2.png,etc to clearly observe the visualisation.
+
