@@ -24,7 +24,7 @@ Various errors and solutions while running the Adaptor file
 2. Try putting the correct table name , databse name, etc.
 3. Check that your table in postgres contains same amount of column as in the json file.
 
-NOTE
+NOTE :- 
 Before running "TableLoadThroughMap.exe" remove all comments from the "config_TableMap_Bank1.json".
 
 #
