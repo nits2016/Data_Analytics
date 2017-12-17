@@ -1,0 +1,81 @@
+[{
+	"target": {	/* Our PostgresDB */
+		"db_user_name": "postgres",
+		"db_password": "postgres",
+		"db_name": "sample_db",
+		"db_hostname": "localhost",
+		"db_port": "5432",
+		"pg_bin": "C:\\Program Files\\PostgreSQL\\9.6\\bin"	/* Adaptor machine's PG-Home's Bin directory, to execute ./psql command from GO */
+	},
+	"source": {	/* Client's Source DB */
+		"db_user_name": "mssql",
+		"db_password": "mssql",
+		"db_name": "source_db",
+		"db_hostname": "localhost",
+		"db_port": "0000"
+	},
+	"import": [
+		{
+			"intermediate_tableName": "in_fct_gl_sub_head_balance",	/* Optional. Temp table to store data "as-such" in CSV; later we can do alterations and move to core_table */
+			"core_tableName": "fct_gl_sub_head_balance",	/* Main table, with alteration from "in_...." table. This has to be used for reports. */
+			"csv_mode": {	/* If income is in CSV format then, used these values to load the tables. If both csv_mode and db_mode are given then code will throw exception. */
+				"filePath": "E:/Finlibre/Final/Bank1/Data/fct_gl_sub_head_balance.csv",
+				"delimiter": ",",
+				"has_header": false,
+				"null_value": "NULL",
+				"incremental_condition": "reporting_date >= today_12am"
+			},
+			"db_mode": {	/* If income is in direct DB access then, used these values to connect-&-read from DB. If both csv_mode and db_mode are given then code will throw exception. */
+				"table_name": "city_master",
+				"incremental_condition": "reporting_date >= today_12am"	/* SELECT query's WHERE condition to filter latest transaction */
+			},
+			"mapping": [
+				{
+					"from": "gl_sub_head_code",	/* Source column in CSV/DB */
+					"to": "gl_sub_head_code"	/* Target column in Postres */
+				},{
+					"from_to": "del_flg"		/* when source & target column names are same */
+				},{
+					"from_to": "amt_outstanding"
+				},{
+					"from_to": "reporting_date",
+					"timezone": "IST",			/* All Date/Time columns in Postgres will be in EPOCH format. So convert the given time into EPOCH with this TimeZone */
+					"import_query": "EXTRACT('EPOCH' FROM reporting_date)*1000"	/* Conversion/Casting/formation to be done, when loading from "in_table" into "core_table" */
+				}
+			],
+			"post_changes": [
+				"UPDATE analytics SET total_fct_gl_sub_head_balance = (SELECT sum(amt_outstanding) FROM fct_gl_sub_head_balance), modified_on = {{CURRENT_DATETIME}}"
+			]
+		},{
+			"intermediate_tableName": "in_dim_activity",
+			"core_tableName": "dim_activity",
+			"csv_mode": {
+				"filePath": "E:/Finlibre/Final/Bank1/Data/dim_activity.csv",
+				"has_header": false
+			},
+			"db_mode": {
+				"table_name": "dim_activity"
+			},
+			"mapping": [
+				{
+					"from_to": "activity_code"
+				},{
+					"from_to": "del_flg"
+				},{
+					"from_to": "activity_desc"
+				},{
+					"from_to": "rbi_bsr_code"
+				},{
+					"from_to": "bank_working_code"
+				}
+			]
+		}
+	],
+	/* WIP */
+	move_to_core: [
+		{
+			core_tableName: "dim_activity",
+			source_query: "SELECT * FROM dim_activity /* INNER JOIN some_table */ "
+		}
+	]
+}]

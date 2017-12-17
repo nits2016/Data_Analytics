@@ -1,0 +1,98 @@
+// Important note that delete all the comments including this otherwise the file wont work
+
+[{
+	"target": {
+		"db_user_name": "postgres", // Most probably for default it is progress
+		"db_password": "your_password", // Most probably for default it is progress also
+		"db_name": "NITS_OWNED",
+		"db_hostname": "localhost",
+		"db_port": "5432",
+		"pg_bin": "C:\\Program Files\\PostgreSQL\\9.6\\bin\\"
+	},
+	"import": [
+		{
+			"core_tableName": "data_drugs", // here the table name will come you made in postgres
+      "csv_mode": {
+        "filePath": "C:\\Users\\nits\\Desktop\\DA\\AggregatedData.csv", // location of the csv file
+        "delimiter": ",",
+        "has_header": true,
+        "null_value": "NULL"
+      },
+      "mapping": [
+	
+        {
+          "from_to": "alc_use"
+        },
+	{
+	  "from_to": "alc_freq"
+	},
+	{
+	 "from_to": "mari_use"	
+	},
+	{
+	 "from_to": "mar_freq"
+	},
+	{
+	 "from_to": "coc_use"
+	},
+	{
+	 "from_to": "coc_freq"
+	},
+	{
+	 "from_to": "crack_us"
+	},
+	{
+	 "from_to": "crack_freq"
+	},
+	{
+	 "from_to": "hero_us"
+	},
+	{
+	 "from_to": "hero_freq"
+	},
+	{
+	 "from_to": "hallu_use"
+	},
+        {
+          "from_to": "hallu_freq"
+        },
+	{
+	 "from_to": "inha_use"
+	},
+	{
+	 "from_to": "inha_freq"
+	},
+	{
+	 "from_to": "pain_use"
+	},
+	{
+	 "from_to": "pain_freq"
+	},
+	{
+	 "from_to": "oxytoc_use"
+	},
+	{
+	 "from_to": "oxytoc_freq"
+	},
+	{
+	 "from_to": "transqui_use"
+	},
+	{
+	 "from_to": "transqui_freq"
+	},
+	{
+	 "from_to": "stimul_use"
+	},
+	{
+	 "from_to": "stimul_freq"
+	},
+	{
+	 "from_to": "meth_use"
+	},
+	{
+	 "from_to": "meth_freq"
+	}
+      ]
+		}
+	]
+}]
