@@ -2,9 +2,13 @@
 
 The aim is to visualise the given data which contains the age-groups(in range) with respect to the drugs consumption. The data sheet is the authentic data of the Indiana state of USA.
 Required software needed -> 
+
 PostgreSQL - https://www.postgresql.org/download/windows/
+
 metabase.jar for visualisation - https://www.metabase.com/start/jar.html
+
 GO language - https://golang.org/dl/
+
 Superset for detailed Visualization. - Dcoker - https://www.docker.com/docker-windows
 and Docker Image for superset can be downloaded from https://hub.docker.com/r/amancevice/superset/
 # Steps
