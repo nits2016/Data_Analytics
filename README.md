@@ -9,7 +9,7 @@ metabase.jar for visualisation - https://www.metabase.com/start/jar.html
 
 GO language - https://golang.org/dl/
 
-Superset for detailed Visualization. - Dcoker - https://www.docker.com/docker-windows
+Superset for detailed Visualization. - Docker - https://www.docker.com/docker-windows
 and Docker Image for superset can be downloaded from https://hub.docker.com/r/amancevice/superset/
 # Steps
 
